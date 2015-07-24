@@ -31,7 +31,7 @@ import java.util.Map;
  * @author Kilian Gärtner
  * @since 24.07.2015
  */
-public final class ClassSchemaFactory {
+final class ClassSchemaFactory {
     private static ClassSchemaFactory ourInstance = new ClassSchemaFactory();
 
     static ClassSchemaFactory getInstance() {
