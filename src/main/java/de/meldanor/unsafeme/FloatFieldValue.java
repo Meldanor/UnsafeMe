@@ -24,47 +24,26 @@
 
 package de.meldanor.unsafeme;
 
-import java.lang.reflect.Field;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author Kilian Gärtner
- * @since 24.07.2015
+ * @since 25.07.2015
  */
-class ClassSchema {
+public class FloatFieldValue extends FieldValue {
+    private final float value;
 
-    final Map<String, FieldInformation> fieldsByName;
-
-    ClassSchema(final Class<?> clazz) {
-        this.fieldsByName = Collections.unmodifiableMap(readFields(clazz));
+    protected FloatFieldValue(float value, String name) {
+        super(name);
+        this.value = value;
     }
 
-    private Map<String, FieldInformation> readFields(final Class<?> clazz) {
-
-        Map<String, FieldInformation> map = new HashMap<>();
-
-        for (Field field : clazz.getDeclaredFields()) {
-            long fieldOffset = UnsafeSerializer.UNSAFE.objectFieldOffset(field);
-            map.put(field.getName(), new FieldInformation(field, fieldOffset));
-        }
-
-        return map;
+    float getValue() {
+        return value;
     }
 
-    public Class<?> getTypeOf(String fieldName) {
-        return fieldsByName.get(fieldName).field.getType();
-    }
-
-
-    class FieldInformation {
-        final Field field;
-        final long fieldOffset;
-
-        public FieldInformation(Field field, long fieldOffset) {
-            this.field = field;
-            this.fieldOffset = fieldOffset;
-        }
+    @Override
+    public String toString() {
+        return "FloatFieldValue{" +
+                "value=" + value +
+                '}';
     }
 }

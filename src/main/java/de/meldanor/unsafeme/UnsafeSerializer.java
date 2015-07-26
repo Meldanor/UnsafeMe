@@ -65,11 +65,10 @@ public class UnsafeSerializer<Product> {
     private void serializeObject(Object object) {
         ClassSchema schema = ClassSchemaFactory.getInstance().getSchema(object.getClass());
 
-        for (Map.Entry<Field, Long> fieldOffsets : schema.fieldOffsets) {
-            Field field = fieldOffsets.getKey();
-            Class<?> fieldType = field.getType();
-            Long fieldOffset = fieldOffsets.getValue();
-            String fieldName = field.getName();
+        for (Map.Entry<String, ClassSchema.FieldInformation> fieldOffsets : schema.fieldsByName.entrySet()) {
+            Class<?> fieldType = fieldOffsets.getValue().field.getType();
+            long fieldOffset = fieldOffsets.getValue().fieldOffset;
+            String fieldName = fieldOffsets.getKey();
             if (!fieldType.isPrimitive())
                 serializeObject(object, fieldOffset, fieldName);
             else
