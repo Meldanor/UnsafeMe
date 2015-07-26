@@ -36,14 +36,15 @@ public class UnsafeParserTest {
 
     @Test
     public void testParse() throws Exception {
-        String input = "aBoolean: true" + System.lineSeparator() +
-                "aChar: a" + System.lineSeparator() +
+        String input = "" +
+                "aBoolean: true" + System.lineSeparator() +
                 "aByte: 2" + System.lineSeparator() +
+                "aChar: a" + System.lineSeparator() +
+                "aDouble: 2.2" + System.lineSeparator() +
+                "aFloat: 1.1" + System.lineSeparator() +
+                "aLong: 1073741824" + System.lineSeparator() +
                 "aShort: 16384" + System.lineSeparator() +
                 "anInt: 1073741824" + System.lineSeparator() +
-                "aLong: 1073741824" + System.lineSeparator() +
-                "aFloat: 1.1" + System.lineSeparator() +
-                "aDouble: 2.2" + System.lineSeparator() +
                 "string: Hi" + System.lineSeparator();
 
         UnsafeParser<String> parser = new UnsafeParser<>(new StringParser());

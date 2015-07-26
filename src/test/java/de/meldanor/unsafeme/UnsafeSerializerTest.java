@@ -42,18 +42,23 @@ public class UnsafeSerializerTest {
         Human objectTwo = new Human("Tim", 1, 5.2);
         Human nonHuman = new Human("Jesus", -1, 3.141592653589793);
 
-        assertEquals("name: Felix" + System.lineSeparator() +
-                "age: 18" + System.lineSeparator() +
-                "mass: 60.7" + System.lineSeparator(), stringSerializer.serialize(objectOne));
+        assertEquals("" +
+                        "age: 18" + System.lineSeparator() +
+                        "mass: 60.7" + System.lineSeparator() +
+                        "name: Felix" + System.lineSeparator(),
+                stringSerializer.serialize(objectOne));
 
-        assertEquals("name: Tim" + System.lineSeparator() +
-                "age: 1" + System.lineSeparator() +
-                "mass: 5.2" + System.lineSeparator(), stringSerializer.serialize(objectTwo));
+        assertEquals("" +
+                        "age: 1" + System.lineSeparator() +
+                        "mass: 5.2" + System.lineSeparator() +
+                        "name: Tim" + System.lineSeparator(),
+                stringSerializer.serialize(objectTwo));
 
-
-        assertEquals("name: Jesus" + System.lineSeparator() +
-                "age: -1" + System.lineSeparator() +
-                "mass: 3.141592653589793" + System.lineSeparator(), stringSerializer.serialize(nonHuman));
+        assertEquals("" +
+                        "age: -1" + System.lineSeparator() +
+                        "mass: 3.141592653589793" + System.lineSeparator() +
+                        "name: Jesus" + System.lineSeparator(),
+                stringSerializer.serialize(nonHuman));
 
         assertEquals("null", stringSerializer.serialize(null));
     }
@@ -79,16 +84,16 @@ public class UnsafeSerializerTest {
                 1073741824L, 1.1F, 2.2F, "Hi");
 
 
-        assertEquals("aBoolean: true" + System.lineSeparator() +
-                "aChar: a" + System.lineSeparator() +
+        assertEquals("" +
+                "aBoolean: true" + System.lineSeparator() +
                 "aByte: 64" + System.lineSeparator() +
+                "aChar: a" + System.lineSeparator() +
+                "aDouble: 2.200000047683716" + System.lineSeparator() +
+                "aFloat: 1.1" + System.lineSeparator() +
+                "aLong: 1073741824" + System.lineSeparator() +
                 "aShort: 16384" + System.lineSeparator() +
                 "anInt: 1073741824" + System.lineSeparator() +
-                "aLong: 1073741824" + System.lineSeparator() +
-                "aFloat: 1.1" + System.lineSeparator() +
-                "aDouble: 2.200000047683716" + System.lineSeparator() +
                 "string: Hi" + System.lineSeparator(), stringSerializer.serialize(objectOne));
-
     }
 
     @SuppressWarnings("unused")

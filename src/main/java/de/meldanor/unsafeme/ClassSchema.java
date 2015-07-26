@@ -25,8 +25,9 @@
 package de.meldanor.unsafeme;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -43,9 +44,13 @@ class ClassSchema {
 
     private Map<String, FieldInformation> readFields(final Class<?> clazz) {
 
-        Map<String, FieldInformation> map = new HashMap<>();
+        Map<String, FieldInformation> map = new LinkedHashMap<>();
+        Field[] fields = clazz.getDeclaredFields();
+        // because of of no guaranteed order, we order the fields by name
+        Arrays.sort(fields, (o1, o2) -> o1.getName().compareTo(o2.getName()));
 
-        for (Field field : clazz.getDeclaredFields()) {
+        for (Field field : fields) {
+            System.out.println(field.getName());
             long fieldOffset = UnsafeSerializer.UNSAFE.objectFieldOffset(field);
             map.put(field.getName(), new FieldInformation(field, fieldOffset));
         }
