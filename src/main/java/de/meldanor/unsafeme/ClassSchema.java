@@ -50,7 +50,6 @@ class ClassSchema {
         Arrays.sort(fields, (o1, o2) -> o1.getName().compareTo(o2.getName()));
 
         for (Field field : fields) {
-            System.out.println(field.getName());
             long fieldOffset = UnsafeSerializer.UNSAFE.objectFieldOffset(field);
             map.put(field.getName(), new FieldInformation(field, fieldOffset));
         }
